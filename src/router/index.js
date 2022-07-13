@@ -1,9 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+// import Login from '@/views/Login'
 Vue.use(VueRouter)
 
-const routes = []
+const routes = [
+  {
+    path: '/login',
+    component: () => import('@/views/Login') // 懒加载写法直接在规则中导入
+  }
+]
 
 const router = new VueRouter({
   routes

@@ -1,18 +1,15 @@
 <template>
   <div>
-    <h1>黑马头条</h1>
-    <span class="iconfont icon-gengduo"></span>
-    <van-button type="primary">主要按钮</van-button>
-    <van-button type="info">信息按钮</van-button>
-    <van-button type="default">默认按钮</van-button>
-    <van-button type="warning">警告按钮</van-button>
-    <van-button type="danger">危险按钮</van-button>
-    <div class="aaa"></div>
+    <!-- 一级路由 -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-export default {}
+
+export default {
+
+}
 // 移动端适配
 // 1. rem动态
 //   - amfe-flexible
