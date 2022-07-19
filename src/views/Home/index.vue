@@ -1,9 +1,12 @@
 <template>
   <div>
     <!-- 头部导航 -->
+    <!-- @click="$router.push('/search')" -->
     <van-nav-bar class="navbar">
       <template #title>
-        <van-button round><van-icon name="search" />搜索</van-button>
+        <van-button round router to="/search"
+          ><van-icon name="search" />搜索</van-button
+        >
       </template>
     </van-nav-bar>
     <!-- tabs选项卡 -->
