@@ -14,12 +14,25 @@
       <!-- 更多按钮 -->
       <span class="iconfont icon-gengduo" @click="popupFn"></span>
     </van-tabs>
-    <EditChannelPopup ref="popup" :myChannels="myChannels"></EditChannelPopup>
+    <EditChannelPopup
+      ref="popup"
+      :myChannels="myChannels"
+      @delMyChannel="delMyChannel"
+      @change-active="changeActive"
+      @add-mychannels="addMyChannels"
+    ></EditChannelPopup>
   </div>
 </template>
 
 <script>
-import { getMyChannels } from '@/api/channel'
+import { mapState } from 'vuex'
+import {
+  getMyChannels,
+  getMyChannelsByLocal,
+  setMyChannelsByLocal,
+  delMyChannel,
+  addMyChannel
+} from '@/api/channel'
 import ArticleList from './component/ArticleList.vue'
 import EditChannelPopup from './component/EditChannelPopup.vue'
 export default {
@@ -39,16 +52,57 @@ export default {
   methods: {
     async getChannels() {
       try {
-        const { data } = await getMyChannels()
-        // console.log(data)
-        this.myChannels = data.data.channels
+        if (!this.user.token) {
+          const myChannels = getMyChannelsByLocal()
+          if (myChannels) {
+            this.myChannels = myChannels
+          } else {
+            const { data } = await getMyChannels()
+            this.myChannels = data.data.channels
+          }
+        } else {
+          const { data } = await getMyChannels()
+          this.myChannels = data.data.channels
+        }
       } catch (error) {
         this.$toast.fail('请重新获取用户频道')
       }
     },
     popupFn() {
       this.$refs.popup.isShow = true
+    },
+    async delMyChannel(id) {
+      this.myChannels = this.myChannels.filter((ele) => ele.id !== id)
+      if (!this.user.token) {
+        setMyChannelsByLocal(this.myChannels)
+      } else {
+        try {
+          await delMyChannel(id)
+        } catch (error) {
+          return this.$toast.fail('删除频道失败')
+        }
+      }
+      this.$toast.success('删除频道成功')
+    },
+    async addMyChannels(channel) {
+      this.myChannels.push(channel)
+      if (!this.user.token) {
+        setMyChannelsByLocal(this.myChannels)
+      } else {
+        try {
+          await addMyChannel(channel.id, this.myChannels.length)
+        } catch (error) {
+          return this.$toast.fail('添加频道失败')
+        }
+      }
+      this.$toast.success('添加频道成功')
+    },
+    changeActive(active) {
+      this.active = active
     }
+  },
+  computed: {
+    ...mapState(['user'])
   }
 }
 </script>
