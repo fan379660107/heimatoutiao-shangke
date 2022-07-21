@@ -15,6 +15,7 @@
       v-for="item in list"
       :key="item"
       :title="item"
+      @click="clickFn(item)"
     >
       <template #default>
         <van-icon v-if="isShowDelete" name="close" @click="delHistorys(item)" />
@@ -32,6 +33,12 @@ export default {
       list: gethistory() || []
     }
   },
+  props: {
+    keywords: {
+      type: String,
+      required: true
+    }
+  },
   created() {
     this.changeHistory()
   },
@@ -47,6 +54,9 @@ export default {
     changeHistory() {
       const res = gethistory()
       this.list = res
+    },
+    clickFn(item) {
+      this.$parent.keywords = item
     }
   }
 }

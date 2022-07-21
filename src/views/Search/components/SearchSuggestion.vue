@@ -1,6 +1,10 @@
 <template>
   <div>
-    <van-cell v-for="(item, index) in highlightData" :key="index">
+    <van-cell
+      v-for="(item, index) in highlightData"
+      :key="index"
+      @click="clickFn"
+    >
       <template #icon>
         <van-icon name="search" class="search-icon" />
       </template>
@@ -23,6 +27,10 @@ export default {
     keywords: {
       type: String,
       required: true
+    },
+    isShowSearchResults: {
+      type: Boolean,
+      required: true
     }
   },
   watch: {
@@ -44,6 +52,9 @@ export default {
       } catch (error) {
         console.log(error)
       }
+    },
+    clickFn() {
+      this.$parent.isShowSearchResults = true
     }
   },
   computed: {
