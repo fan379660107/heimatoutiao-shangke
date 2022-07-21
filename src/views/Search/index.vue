@@ -12,7 +12,11 @@
         class="search"
       />
     </form>
-    <component :is="componentName" :keywords="keywords"></component>
+    <component
+      :is="componentName"
+      :keywords="keywords"
+      :isShowSearchResults="isShowSearchResults"
+    ></component>
   </div>
 </template>
 
@@ -34,7 +38,7 @@ export default {
   },
   methods: {
     onSearch() {
-      console.log('111')
+      // console.log('111')
       this.isShowSearchResults = true
     },
     backToHome() {
