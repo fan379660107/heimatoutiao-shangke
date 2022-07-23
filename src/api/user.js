@@ -35,3 +35,26 @@ export const getUserInfo = () =>
     //   Authorization: `Bearer ${store.state.user.token}`
     // }
   })
+/**
+ * 关注用户
+ * @param {String} target 关注用户的id
+ * @returns
+ */
+export const getUserFollowings = (target) =>
+  request({
+    method: 'POST',
+    url: '/v1_0/user/followings',
+    data: {
+      target
+    }
+  })
+/**
+ * 取消关注
+ * @param {String} target 目标用户（被取消关注的用户id）
+ * @returns
+ */
+export const cancelNewsFollowings = (target) =>
+  request({
+    method: 'DELETE',
+    url: `/v1_0/user/followings/${target}`
+  })

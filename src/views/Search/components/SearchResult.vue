@@ -35,7 +35,7 @@ export default {
       const { data } = await getSearchResult(this.keywords, 2, 20)
       // console.log(data.data.results)
       const res = gethistory() || []
-      res.push(this.keywords)
+      res.unshift(this.keywords)
       const arr = Array.from(new Set(res))
       setHistory(arr)
       // console.log(this.keywords)

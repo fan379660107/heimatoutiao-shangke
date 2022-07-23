@@ -17,6 +17,7 @@
           v-for="item in articles"
           :key="item.art_id"
           :articleInfo="item"
+          @click.native="newListClick(item.art_id)"
         ></ArticleItem>
       </van-list>
     </van-pull-refresh>
@@ -84,6 +85,15 @@ export default {
         this.loading = false
         this.refreshLoading = false
       }
+    },
+    newListClick(id) {
+      // console.log(111)
+      this.$router.push({
+        path: '/news',
+        query: {
+          id: id
+        }
+      })
     }
   },
   components: {

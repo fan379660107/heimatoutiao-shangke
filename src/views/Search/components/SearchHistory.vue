@@ -57,6 +57,7 @@ export default {
     },
     clickFn(item) {
       this.$parent.keywords = item
+      this.$parent.isShowSearchResults = true
     }
   }
 }
