@@ -242,6 +242,9 @@ footer {
         color: #6ba3d8;
       }
     }
+    .van-share-sheet {
+      display: unset;
+    }
   }
 }
 .box1 {

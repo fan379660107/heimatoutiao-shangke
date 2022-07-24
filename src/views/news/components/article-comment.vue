@@ -137,7 +137,8 @@
                         <!-- 内部回复弹层 -->
                       </p>
                     </div>
-                    <van-icon name="good-job-o" />
+                    <van-icon name="good-job" v-if="attitude" />
+                    <van-icon name="good-job-o" v-else />
                     <span>赞</span>
                   </van-cell>
                   <!-- 回复里面评论的循环列表 -->
@@ -171,7 +172,8 @@ export default {
       finished: false, // 是否加载结束
       internalFinished: true,
       listOne: [],
-      listTwo: []
+      listTwo: [],
+      attitude: this.$store.state.news.attitude
     }
   },
   created() {

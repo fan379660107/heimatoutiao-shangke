@@ -58,3 +58,39 @@ export const cancelNewsFollowings = (target) =>
     method: 'DELETE',
     url: `/v1_0/user/followings/${target}`
   })
+/**
+ * 编辑用户照片资料（头像、身份证照片）
+ * @param {file} file 头像
+ * @returns promise
+ */
+export const updatePortrait = (file) =>
+  request({
+    url: '/v1_0/user/photo',
+    method: 'PATCH',
+    data: file
+  })
+/**
+ * 编辑用户个人资料
+ * @param {String} name 昵称
+ * @param {String} gender 性别，0-男，1-女
+ * @param {String} birthday 生日，格式'2018-12-20'
+ * @returns promise
+ */
+export const EditUserProfile = (name, gender, birthday) =>
+  request({
+    url: '/v1_0/user/profile',
+    method: 'PATCH',
+    data: {
+      name,
+      gender,
+      birthday
+    }
+  })
+/**
+ * 获取用户个人资料
+ * @returns promise
+ */
+export const userProfile = () =>
+  request({
+    url: '/v1_0/user/profile'
+  })

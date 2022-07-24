@@ -38,6 +38,10 @@ const routes = [
   {
     path: '/news',
     component: () => import('@/views/news') // 懒加载写法直接在规则中导入
+  },
+  {
+    path: '/userInformation',
+    component: () => import('@/views/userInformation') // 懒加载写法直接在规则中导入
   }
 ]
 
